@@ -195,6 +195,9 @@
     <EmbeddedResource Include="frontEnd\Ventanas2\Descontinuar.resx">
       <DependentUpon>Descontinuar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\ListaCambios.resx">
+      <DependentUpon>ListaCambios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,8 +207,17 @@
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\Monitoreo.resx">
+      <DependentUpon>Monitoreo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarVenta.resx">
       <DependentUpon>RegistrarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\ReporteLibros.resx">
+      <DependentUpon>ReporteLibros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\ReporteVentas.resx">
+      <DependentUpon>ReporteVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

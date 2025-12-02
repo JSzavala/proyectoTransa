@@ -16,5 +16,19 @@ namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
         {
             InitializeComponent();
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Main frmMain = new Main();
+            frmMain.Show();
+            this.Close();
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblHora.Text = DateTime.Now.ToShortTimeString();
+            lblFecha.Text = DateTime.Now.ToShortDateString();
+        }
     }
 }
