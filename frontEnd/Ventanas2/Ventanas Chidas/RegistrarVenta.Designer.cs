@@ -77,12 +77,12 @@ namespace proyectoInventario
             // 
             // btnRegistrarVenta
             // 
-            this.btnRegistrarVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(75)))), ((int)(((byte)(255)))));
+            this.btnRegistrarVenta.BackColor = System.Drawing.Color.Blue;
             this.btnRegistrarVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegistrarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrarVenta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistrarVenta.ForeColor = System.Drawing.Color.White;
-            this.btnRegistrarVenta.Location = new System.Drawing.Point(22, 276);
+            this.btnRegistrarVenta.Location = new System.Drawing.Point(31, 345);
             this.btnRegistrarVenta.Name = "btnRegistrarVenta";
             this.btnRegistrarVenta.Size = new System.Drawing.Size(110, 38);
             this.btnRegistrarVenta.TabIndex = 10;
@@ -92,7 +92,7 @@ namespace proyectoInventario
             // 
             // btnVolver
             // 
-            this.btnVolver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(50)))), ((int)(((byte)(86)))));
+            this.btnVolver.BackColor = System.Drawing.Color.Crimson;
             this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVolver.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -158,12 +158,12 @@ namespace proyectoInventario
             // 
             // btnCalcularPrecio
             // 
-            this.btnCalcularPrecio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(75)))), ((int)(((byte)(255)))));
+            this.btnCalcularPrecio.BackColor = System.Drawing.Color.Blue;
             this.btnCalcularPrecio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalcularPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCalcularPrecio.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalcularPrecio.ForeColor = System.Drawing.Color.White;
-            this.btnCalcularPrecio.Location = new System.Drawing.Point(241, 276);
+            this.btnCalcularPrecio.Location = new System.Drawing.Point(243, 345);
             this.btnCalcularPrecio.Name = "btnCalcularPrecio";
             this.btnCalcularPrecio.Size = new System.Drawing.Size(110, 38);
             this.btnCalcularPrecio.TabIndex = 17;
@@ -182,8 +182,8 @@ namespace proyectoInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(13)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(375, 339);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(59)))), ((int)(((byte)(82)))));
+            this.ClientSize = new System.Drawing.Size(375, 411);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.btnCalcularPrecio);
             this.Controls.Add(this.label2);

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace proyectoInventario
+namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
 {
-    public partial class Form1 : Form
+    public partial class Monitoreo : Form
     {
-        public Form1()
+        public Monitoreo()
         {
             InitializeComponent();
         }

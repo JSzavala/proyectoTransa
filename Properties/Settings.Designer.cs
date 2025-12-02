@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace proyectoTransa.Properties
+namespace proyectoInventario.Properties
 {
 
 
