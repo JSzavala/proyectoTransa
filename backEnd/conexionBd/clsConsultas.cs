@@ -303,8 +303,50 @@ namespace proyectoInventario.backEnd.conexionBd
        // 1. Crear una tabla ProductosDescontinuados
     // 2. Mover el producto a esa tabla antes de eliminarlo
      // 3. O agregar un campo ACTIVO a la tabla Producto
-        }
+      }
 
+     /// <summary>
+        /// Método genérico para SELECT con JOIN y WHERE - Consulta datos de múltiples tablas relacionadas
+        /// </summary>
+        /// <param name="consulta">Consulta SQL SELECT con JOIN y WHERE, usando parámetros (@parametro)</param>
+        /// <param name="parametros">Diccionario con los parámetros y sus valores</param>
+  /// <returns>DataTable con los resultados de la consulta</returns>
+        public DataTable SelectWithJoin(string consulta, Dictionary<string, object> parametros = null)
+        {
+        DataTable tabla = new DataTable();
+
+            try
+            {
+  if (conexionBd.AbrirConexion())
+    {
+        using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
+           {
+    // Agregar parámetros de forma segura
+       if (parametros != null)
+    {
+   foreach (var parametro in parametros)
+     {
+          comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
+      }
+              }
+
+    using (MySqlDataAdapter adaptador = new MySqlDataAdapter(comando))
+ {
+         adaptador.Fill(tabla);
+          }
+         }
+
+      conexionBd.CerrarConexion();
+        }
+      }
+  catch (MySqlException ex)
+      {
+        Console.WriteLine("Error en SELECT con JOIN: " + ex.Message);
+       throw new Exception("Error al ejecutar consulta SELECT con JOIN: " + ex.Message, ex);
+   }
+
+        return tabla;
+    }
 
     }
 }

@@ -104,6 +104,7 @@
     <Compile Include="backEnd\POCOS\Proveedor.cs" />
     <Compile Include="backEnd\POCOS\Usuario.cs" />
     <Compile Include="backEnd\Servicios\srvRegistrarMovimientoInventario.cs" />
+    <Compile Include="backEnd\Servicios\srvReporteVentas.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
