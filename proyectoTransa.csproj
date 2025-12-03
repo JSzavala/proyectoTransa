@@ -147,10 +147,10 @@
     <Compile Include="frontEnd\Ventanas2\RegistrarCompra.Designer.cs">
       <DependentUpon>RegistrarCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="frontEnd\Ventanas2\RegistrarProducto.cs">
+    <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frontEnd\Ventanas2\RegistrarProducto.Designer.cs">
+    <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarProducto.Designer.cs">
       <DependentUpon>RegistrarProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="frontEnd\Ventanas2\RegistrarUsuarios.cs">
@@ -209,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\Monitoreo.resx">
       <DependentUpon>Monitoreo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarProducto.resx">
+      <DependentUpon>RegistrarProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarVenta.resx">
       <DependentUpon>RegistrarVenta.cs</DependentUpon>

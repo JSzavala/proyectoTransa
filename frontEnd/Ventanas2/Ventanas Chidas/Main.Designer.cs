@@ -47,6 +47,7 @@ if (disposing) {
             this.lblHora = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitleMain
@@ -67,7 +68,7 @@ if (disposing) {
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarSesion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(101, 391);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(102, 430);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(106, 25);
             this.btnCerrarSesion.TabIndex = 8;
@@ -97,7 +98,7 @@ if (disposing) {
             this.btnReporteVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteVentas.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteVentas.ForeColor = System.Drawing.Color.White;
-            this.btnReporteVentas.Location = new System.Drawing.Point(101, 149);
+            this.btnReporteVentas.Location = new System.Drawing.Point(101, 201);
             this.btnReporteVentas.Name = "btnReporteVentas";
             this.btnReporteVentas.Size = new System.Drawing.Size(107, 40);
             this.btnReporteVentas.TabIndex = 13;
@@ -112,7 +113,7 @@ if (disposing) {
             this.btnReporteLibros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteLibros.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteLibros.ForeColor = System.Drawing.Color.White;
-            this.btnReporteLibros.Location = new System.Drawing.Point(101, 206);
+            this.btnReporteLibros.Location = new System.Drawing.Point(101, 258);
             this.btnReporteLibros.Name = "btnReporteLibros";
             this.btnReporteLibros.Size = new System.Drawing.Size(107, 40);
             this.btnReporteLibros.TabIndex = 14;
@@ -127,7 +128,7 @@ if (disposing) {
             this.btnListaCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListaCambios.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListaCambios.ForeColor = System.Drawing.Color.White;
-            this.btnListaCambios.Location = new System.Drawing.Point(101, 264);
+            this.btnListaCambios.Location = new System.Drawing.Point(101, 316);
             this.btnListaCambios.Name = "btnListaCambios";
             this.btnListaCambios.Size = new System.Drawing.Size(107, 40);
             this.btnListaCambios.TabIndex = 15;
@@ -142,7 +143,7 @@ if (disposing) {
             this.btnMonitoreo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMonitoreo.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMonitoreo.ForeColor = System.Drawing.Color.White;
-            this.btnMonitoreo.Location = new System.Drawing.Point(101, 320);
+            this.btnMonitoreo.Location = new System.Drawing.Point(101, 372);
             this.btnMonitoreo.Name = "btnMonitoreo";
             this.btnMonitoreo.Size = new System.Drawing.Size(107, 40);
             this.btnMonitoreo.TabIndex = 16;
@@ -175,12 +176,28 @@ if (disposing) {
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Blue;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(101, 146);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(107, 40);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Agregar Libros";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(59)))), ((int)(((byte)(82)))));
-            this.ClientSize = new System.Drawing.Size(314, 442);
+            this.ClientSize = new System.Drawing.Size(314, 481);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.btnMonitoreo);
@@ -206,5 +223,6 @@ if (disposing) {
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
     }
 }
