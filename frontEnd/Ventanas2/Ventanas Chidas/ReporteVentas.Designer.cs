@@ -33,13 +33,13 @@
             this.dgvReporteVentas = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtFechaInicio = new System.Windows.Forms.TextBox();
-            this.txtFechaFin = new System.Windows.Forms.TextBox();
             this.lblHora = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnGenerarReporte = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteVentas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,26 +79,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(34, 97);
+            this.label2.Location = new System.Drawing.Point(34, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 15);
             this.label2.TabIndex = 9;
             this.label2.Text = "Fecha de Fin";
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // txtFechaInicio
-            // 
-            this.txtFechaInicio.Location = new System.Drawing.Point(131, 69);
-            this.txtFechaInicio.Name = "txtFechaInicio";
-            this.txtFechaInicio.Size = new System.Drawing.Size(100, 20);
-            this.txtFechaInicio.TabIndex = 10;
-            // 
-            // txtFechaFin
-            // 
-            this.txtFechaFin.Location = new System.Drawing.Point(131, 95);
-            this.txtFechaFin.Name = "txtFechaFin";
-            this.txtFechaFin.Size = new System.Drawing.Size(100, 20);
-            this.txtFechaFin.TabIndex = 11;
             // 
             // lblHora
             // 
@@ -139,6 +125,7 @@
             this.btnGenerarReporte.TabIndex = 20;
             this.btnGenerarReporte.Text = "Generar Reporte";
             this.btnGenerarReporte.UseVisualStyleBackColor = false;
+            this.btnGenerarReporte.Click += new System.EventHandler(this.btnGenerarReporte_Click);
             // 
             // btnVolver
             // 
@@ -155,18 +142,32 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // dtpInicio
+            // 
+            this.dtpInicio.Location = new System.Drawing.Point(130, 69);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(200, 20);
+            this.dtpInicio.TabIndex = 22;
+            // 
+            // dtpFin
+            // 
+            this.dtpFin.Location = new System.Drawing.Point(130, 97);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(200, 20);
+            this.dtpFin.TabIndex = 23;
+            // 
             // ReporteVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(59)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(614, 400);
+            this.Controls.Add(this.dtpFin);
+            this.Controls.Add(this.dtpInicio);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGenerarReporte);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblHora);
-            this.Controls.Add(this.txtFechaFin);
-            this.Controls.Add(this.txtFechaInicio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvReporteVentas);
@@ -185,12 +186,12 @@
         private System.Windows.Forms.DataGridView dgvReporteVentas;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtFechaInicio;
-        private System.Windows.Forms.TextBox txtFechaFin;
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnGenerarReporte;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.DateTimePicker dtpInicio;
+        private System.Windows.Forms.DateTimePicker dtpFin;
     }
 }

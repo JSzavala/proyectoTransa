@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using proyectoInventario.backEnd.Servicios;
 
 namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
 {
@@ -43,6 +44,12 @@ namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
             Main frmMain = new Main();
             frmMain.Show();
             this.Close();
+        }
+
+        private void btnGenerarReporte_Click(object sender, EventArgs e)
+        {
+            DataTable empleados = new srvReporteVentas().ObtenerVentasPorEmpleadoPorFecha(dtpInicio.Value, dtpFin.Value);
+            dgvReporteVentas.DataSource = empleados;
         }
     }
 }
