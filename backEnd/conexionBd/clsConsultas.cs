@@ -305,48 +305,84 @@ namespace proyectoInventario.backEnd.conexionBd
      // 3. O agregar un campo ACTIVO a la tabla Producto
       }
 
-     /// <summary>
+        /// <summary>
         /// Método genérico para SELECT con JOIN y WHERE - Consulta datos de múltiples tablas relacionadas
         /// </summary>
         /// <param name="consulta">Consulta SQL SELECT con JOIN y WHERE, usando parámetros (@parametro)</param>
         /// <param name="parametros">Diccionario con los parámetros y sus valores</param>
-  /// <returns>DataTable con los resultados de la consulta</returns>
+        /// <returns>DataTable con los resultados de la consulta</returns>
         public DataTable SelectWithJoin(string consulta, Dictionary<string, object> parametros = null)
         {
-        DataTable tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
-  if (conexionBd.AbrirConexion())
-    {
-        using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
-           {
-    // Agregar parámetros de forma segura
-       if (parametros != null)
-    {
-   foreach (var parametro in parametros)
-     {
-          comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
-      }
-              }
+                if (conexionBd.AbrirConexion())
+                {
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
+                    {
+                        // Agregar parámetros de forma segura
+                        if (parametros != null)
+                        {
+                            foreach (var parametro in parametros)
+                            {
+                                comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
+                            }
+                        }
 
-    using (MySqlDataAdapter adaptador = new MySqlDataAdapter(comando))
- {
-         adaptador.Fill(tabla);
-          }
-         }
+                        using (MySqlDataAdapter adaptador = new MySqlDataAdapter(comando))
+                        {
+                            adaptador.Fill(tabla);
+                        }
+                    }
 
-      conexionBd.CerrarConexion();
+                    conexionBd.CerrarConexion();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en SELECT con JOIN: " + ex.Message);
+                throw new Exception("Error al ejecutar consulta SELECT con JOIN: " + ex.Message, ex);
+            }
+
+            return tabla;
+
         }
-      }
-  catch (MySqlException ex)
-      {
-        Console.WriteLine("Error en SELECT con JOIN: " + ex.Message);
-       throw new Exception("Error al ejecutar consulta SELECT con JOIN: " + ex.Message, ex);
-   }
 
-        return tabla;
-    }
+        public DataTable ObtenerVentasPorFecha(string mes, string anio)
+        {
+            // Validamos que vengan datos antes de ir a la BD
+            if (string.IsNullOrEmpty(mes) || string.IsNullOrEmpty(anio))
+            {
+                return null;
+            }
+
+            // 1. Definimos la consulta SQL (Aquí es donde debe estar, no en la ventana)
+            // NOTA: Verifica que 'Venta', 'DetalleVenta' y sus columnas coincidan con tu BD real.
+            string sql = @"
+                SELECT 
+                    P.Nombre AS 'Titulo Libro',
+                    P.Descripcion AS 'Genero/Desc',
+                    SUM(DV.Cantidad) AS 'Unidades Vendidas',
+                    SUM(DV.Subtotal) AS 'Total Ingresos'
+                FROM Venta V
+                INNER JOIN DetalleVenta DV ON V.IdVenta = DV.IdVenta
+                INNER JOIN Producto P ON DV.IdProducto = P.IdProducto
+                WHERE MONTH(V.FechaVenta) = @Mes 
+                  AND YEAR(V.FechaVenta) = @Anio
+                GROUP BY P.IdProducto, P.Nombre, P.Descripcion
+                ORDER BY SUM(DV.Cantidad) DESC";
+
+            // 2. Preparamos los parámetros usando tu estructura
+            var parametros = new Dictionary<string, object>
+            {
+                { "@Mes", mes },
+                { "@Anio", anio }
+            };
+
+            // 3. Ejecutamos usando el método de instancia actual
+            return SelectWithJoin(sql, parametros);
+        }
 
     }
 }
