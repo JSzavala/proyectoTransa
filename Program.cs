@@ -16,7 +16,7 @@ namespace proyectoInventario
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frontEnd.Ventanas2.Ventanas_Chidas.ReporteVentas());
+            Application.Run(new Main());
         }
     }
 }

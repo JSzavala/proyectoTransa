@@ -42,12 +42,12 @@ if (disposing) {
             this.btnRegistrarVenta = new System.Windows.Forms.Button();
             this.btnReporteVentas = new System.Windows.Forms.Button();
             this.btnReporteLibros = new System.Windows.Forms.Button();
-            this.btnListaCambios = new System.Windows.Forms.Button();
             this.btnMonitoreo = new System.Windows.Forms.Button();
             this.lblHora = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitleMain
@@ -55,7 +55,7 @@ if (disposing) {
             this.lblTitleMain.AutoSize = true;
             this.lblTitleMain.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleMain.ForeColor = System.Drawing.Color.White;
-            this.lblTitleMain.Location = new System.Drawing.Point(101, 18);
+            this.lblTitleMain.Location = new System.Drawing.Point(137, 18);
             this.lblTitleMain.Name = "lblTitleMain";
             this.lblTitleMain.Size = new System.Drawing.Size(114, 24);
             this.lblTitleMain.TabIndex = 2;
@@ -68,7 +68,7 @@ if (disposing) {
             this.btnCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarSesion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarSesion.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(102, 430);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(105, 334);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(106, 25);
             this.btnCerrarSesion.TabIndex = 8;
@@ -83,9 +83,9 @@ if (disposing) {
             this.btnRegistrarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrarVenta.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistrarVenta.ForeColor = System.Drawing.Color.White;
-            this.btnRegistrarVenta.Location = new System.Drawing.Point(101, 91);
+            this.btnRegistrarVenta.Location = new System.Drawing.Point(38, 251);
             this.btnRegistrarVenta.Name = "btnRegistrarVenta";
-            this.btnRegistrarVenta.Size = new System.Drawing.Size(107, 40);
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(114, 40);
             this.btnRegistrarVenta.TabIndex = 12;
             this.btnRegistrarVenta.Text = "Registrar Venta";
             this.btnRegistrarVenta.UseVisualStyleBackColor = false;
@@ -98,9 +98,9 @@ if (disposing) {
             this.btnReporteVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteVentas.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteVentas.ForeColor = System.Drawing.Color.White;
-            this.btnReporteVentas.Location = new System.Drawing.Point(101, 201);
+            this.btnReporteVentas.Location = new System.Drawing.Point(38, 176);
             this.btnReporteVentas.Name = "btnReporteVentas";
-            this.btnReporteVentas.Size = new System.Drawing.Size(107, 40);
+            this.btnReporteVentas.Size = new System.Drawing.Size(114, 40);
             this.btnReporteVentas.TabIndex = 13;
             this.btnReporteVentas.Text = "Reporte de Ventas Empleado";
             this.btnReporteVentas.UseVisualStyleBackColor = false;
@@ -113,28 +113,13 @@ if (disposing) {
             this.btnReporteLibros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporteLibros.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReporteLibros.ForeColor = System.Drawing.Color.White;
-            this.btnReporteLibros.Location = new System.Drawing.Point(101, 258);
+            this.btnReporteLibros.Location = new System.Drawing.Point(246, 176);
             this.btnReporteLibros.Name = "btnReporteLibros";
             this.btnReporteLibros.Size = new System.Drawing.Size(107, 40);
             this.btnReporteLibros.TabIndex = 14;
             this.btnReporteLibros.Text = "Reporte de Libros Vendidos";
             this.btnReporteLibros.UseVisualStyleBackColor = false;
             this.btnReporteLibros.Click += new System.EventHandler(this.btnReporteLibros_Click);
-            // 
-            // btnListaCambios
-            // 
-            this.btnListaCambios.BackColor = System.Drawing.Color.Blue;
-            this.btnListaCambios.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnListaCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListaCambios.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListaCambios.ForeColor = System.Drawing.Color.White;
-            this.btnListaCambios.Location = new System.Drawing.Point(101, 316);
-            this.btnListaCambios.Name = "btnListaCambios";
-            this.btnListaCambios.Size = new System.Drawing.Size(107, 40);
-            this.btnListaCambios.TabIndex = 15;
-            this.btnListaCambios.Text = "Lista de Cambios";
-            this.btnListaCambios.UseVisualStyleBackColor = false;
-            this.btnListaCambios.Click += new System.EventHandler(this.btnListaCambios_Click);
             // 
             // btnMonitoreo
             // 
@@ -143,7 +128,7 @@ if (disposing) {
             this.btnMonitoreo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMonitoreo.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMonitoreo.ForeColor = System.Drawing.Color.White;
-            this.btnMonitoreo.Location = new System.Drawing.Point(101, 372);
+            this.btnMonitoreo.Location = new System.Drawing.Point(246, 251);
             this.btnMonitoreo.Name = "btnMonitoreo";
             this.btnMonitoreo.Size = new System.Drawing.Size(107, 40);
             this.btnMonitoreo.TabIndex = 16;
@@ -155,7 +140,7 @@ if (disposing) {
             // 
             this.lblHora.AutoSize = true;
             this.lblHora.ForeColor = System.Drawing.Color.White;
-            this.lblHora.Location = new System.Drawing.Point(117, 51);
+            this.lblHora.Location = new System.Drawing.Point(157, 55);
             this.lblHora.Name = "lblHora";
             this.lblHora.Size = new System.Drawing.Size(35, 13);
             this.lblHora.TabIndex = 17;
@@ -165,7 +150,7 @@ if (disposing) {
             // 
             this.lblFecha.AutoSize = true;
             this.lblFecha.ForeColor = System.Drawing.Color.White;
-            this.lblFecha.Location = new System.Drawing.Point(158, 51);
+            this.lblFecha.Location = new System.Drawing.Point(198, 55);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(35, 13);
             this.lblFecha.TabIndex = 18;
@@ -183,7 +168,7 @@ if (disposing) {
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(101, 146);
+            this.button1.Location = new System.Drawing.Point(246, 91);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 40);
             this.button1.TabIndex = 19;
@@ -191,17 +176,32 @@ if (disposing) {
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Blue;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(38, 91);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(114, 40);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Agregar Empleado";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(59)))), ((int)(((byte)(82)))));
-            this.ClientSize = new System.Drawing.Size(314, 481);
+            this.ClientSize = new System.Drawing.Size(404, 382);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.btnMonitoreo);
-            this.Controls.Add(this.btnListaCambios);
             this.Controls.Add(this.btnReporteLibros);
             this.Controls.Add(this.btnReporteVentas);
             this.Controls.Add(this.btnRegistrarVenta);
@@ -218,11 +218,11 @@ if (disposing) {
         private System.Windows.Forms.Button btnRegistrarVenta;
         private System.Windows.Forms.Button btnReporteVentas;
         private System.Windows.Forms.Button btnReporteLibros;
-        private System.Windows.Forms.Button btnListaCambios;
         private System.Windows.Forms.Button btnMonitoreo;
         private System.Windows.Forms.Label lblHora;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

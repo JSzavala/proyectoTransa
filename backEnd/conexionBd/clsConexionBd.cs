@@ -19,7 +19,7 @@ namespace proyectoInventario.backEnd.conexionBd
         {
             // Configurar la cadena de conexión
             // Ajusta los valores según tu configuración de BD
-            cadenaConexion = "Server=localhost;Database=VENTAS;Uid=root;Pwd=root;";
+            cadenaConexion = "Server=localhost;Database=VENTAS;Uid=root;Pwd=1234;";
             conexion = new MySqlConnection(cadenaConexion);
         }
 

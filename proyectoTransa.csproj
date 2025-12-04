@@ -115,6 +115,7 @@
     <Compile Include="backEnd\POCOS\Producto.cs" />
     <Compile Include="backEnd\POCOS\Proveedor.cs" />
     <Compile Include="backEnd\POCOS\Usuario.cs" />
+    <Compile Include="backEnd\Servicios\srvEmpleado.cs" />
     <Compile Include="backEnd\Servicios\srvRegistrarMovimientoInventario.cs" />
     <Compile Include="backEnd\Servicios\srvReporteVentas.cs" />
     <Compile Include="Form1.cs">
@@ -165,10 +166,10 @@
     <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarProducto.Designer.cs">
       <DependentUpon>RegistrarProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="frontEnd\Ventanas2\RegistrarUsuarios.cs">
+    <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frontEnd\Ventanas2\RegistrarUsuarios.Designer.cs">
+    <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarUsuarios.Designer.cs">
       <DependentUpon>RegistrarUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="frontEnd\Ventanas2\Ventanas Chidas\Main.cs">

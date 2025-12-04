@@ -17,6 +17,7 @@ namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
         public ReporteLibros()
         {
             InitializeComponent();
+            _misConsultas = new clsConsultas();
         }
 
         private void lblTitleMain_Click(object sender, EventArgs e)
@@ -48,8 +49,7 @@ namespace proyectoInventario.frontEnd.Ventanas2.Ventanas_Chidas
 
             try
             {
-                // 3. CORRECCIÓN: Usamos la variable '_misConsultas' que creamos arriba
-                // en lugar de llamar a la clase directamente.
+                
                 var tablaReporte = _misConsultas.ObtenerVentasPorFecha(txtMes.Text, txtAño.Text);
 
                 if (tablaReporte != null && tablaReporte.Rows.Count > 0)

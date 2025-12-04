@@ -97,5 +97,12 @@ namespace proyectoInventario
             frmRegistrar.Show();
             this.Hide();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RegistrarUsuarios frmRegistrar = new RegistrarUsuarios();
+            frmRegistrar.Show();
+            this.Hide();
+        }
     }
 }
