@@ -77,17 +77,17 @@ namespace proyectoInventario.backEnd.Servicios
  /// Obtiene todos los tipos de usuario disponibles
         /// </summary>
      public DataTable ObtenerTiposUsuario()
+     {
+        try
         {
-try
-    {
-                return consultas.ObtenerTiposUsuario();
-            }
- catch (Exception ex)
-       {
-                Console.WriteLine("Error al obtener tipos de usuario: " + ex.Message);
-    throw new Exception("Error al obtener tipos de usuario: " + ex.Message, ex);
-     }
+            return consultas.ObtenerTiposUsuario();
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error al obtener tipos de usuario: " + ex.Message);
+            throw new Exception("Error al obtener tipos de usuario: " + ex.Message, ex);
+        }
+     }
 
         /// <summary>
         /// Lista todos los empleados registrados
@@ -147,11 +147,49 @@ try
     int resultado = consultas.EliminarEmpleado(idEmpleado);
        return resultado > 0;
   }
-            catch (Exception ex)
+   catch (Exception ex)
          {
       Console.WriteLine("Error al eliminar empleado: " + ex.Message);
         throw new Exception("Error al eliminar empleado: " + ex.Message, ex);
             }
      }
+
+    /// <summary>
+        /// Obtiene todos los usuarios activos con información completa
+        /// </summary>
+        public DataTable ObtenerUsuariosActivos()
+        {
+   try
+            {
+       return consultas.ObtenerUsuariosActivos();
+}
+     catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener usuarios activos: " + ex.Message);
+     throw new Exception("Error al obtener usuarios activos: " + ex.Message, ex);
+ }
+     }
+
+        /// <summary>
+      /// Desactiva un usuario buscándolo por nombre de usuario
+        /// </summary>
+        /// <param name="nombreUsuario">Nombre de usuario a desactivar</param>
+        /// <returns>True si se desactivó correctamente</returns>
+        public bool DesactivarUsuario(string nombreUsuario)
+ {
+            try
+ {
+           if (string.IsNullOrWhiteSpace(nombreUsuario))
+   throw new Exception("El nombre de usuario es requerido");
+
+      int resultado = consultas.DesactivarUsuario(nombreUsuario);
+    return resultado > 0;
+     }
+            catch (Exception ex)
+       {
+     Console.WriteLine("Error al desactivar usuario: " + ex.Message);
+      throw new Exception("Error al desactivar usuario: " + ex.Message, ex);
+            }
+        }
     }
 }

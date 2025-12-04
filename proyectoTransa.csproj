@@ -226,6 +226,9 @@
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarProducto.resx">
       <DependentUpon>RegistrarProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarUsuarios.resx">
+      <DependentUpon>RegistrarUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frontEnd\Ventanas2\Ventanas Chidas\RegistrarVenta.resx">
       <DependentUpon>RegistrarVenta.cs</DependentUpon>
     </EmbeddedResource>

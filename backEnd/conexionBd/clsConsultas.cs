@@ -511,53 +511,53 @@ namespace proyectoInventario.backEnd.conexionBd
         {
             string consulta = "CALL sp_InsertarEmpleado(@p_Nombre, @p_ApellidoPaterno, @p_ApellidoMaterno, @p_RFC, @p_ID_Usuario)";
         
-   var parametros = new Dictionary<string, object>
-     {
-        { "@p_Nombre", nombre },
-             { "@p_ApellidoPaterno", apellidoPaterno },
-  { "@p_ApellidoMaterno", apellidoMaterno },
-      { "@p_RFC", rfc },
-        { "@p_ID_Usuario", idUsuario }
+            var parametros = new Dictionary<string, object>
+            {
+                { "@p_Nombre", nombre },
+                { "@p_ApellidoPaterno", apellidoPaterno },
+                { "@p_ApellidoMaterno", apellidoMaterno },
+                { "@p_RFC", rfc },
+                { "@p_ID_Usuario", idUsuario }
             };
 
-   // Ejecutar el procedimiento y obtener el ID generado
+            // Ejecutar el procedimiento y obtener el ID generado
             try
             {
-   if (conexionBd.AbrirConexion())
-        {
-        using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
-   {
-   foreach (var parametro in parametros)
-     {
-      comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
-}
+                if (conexionBd.AbrirConexion())
+                {
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
+                    {
+                        foreach (var parametro in parametros)
+                        {
+                            comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
+                        }
 
-        comando.ExecuteNonQuery();
+                        comando.ExecuteNonQuery();
       
-      // Obtener el último ID insertado
-                MySqlCommand cmdLastId = new MySqlCommand("SELECT LAST_INSERT_ID()", conexionBd.ObtenerConexion());
- long idGenerado = Convert.ToInt64(cmdLastId.ExecuteScalar());
+                        // Obtener el último ID insertado
+                        MySqlCommand cmdLastId = new MySqlCommand("SELECT LAST_INSERT_ID()", conexionBd.ObtenerConexion());
+                        long idGenerado = Convert.ToInt64(cmdLastId.ExecuteScalar());
   
-       conexionBd.CerrarConexion();
-          return idGenerado;
-         }
-         }
+                        conexionBd.CerrarConexion();
+                        return idGenerado;
+                    }
+                }
             }
-          catch (MySqlException ex)
+            catch (MySqlException ex)
             {
-     Console.WriteLine("Error al insertar empleado: " + ex.Message);
-       throw new Exception("Error al insertar empleado: " + ex.Message, ex);
- }
+                Console.WriteLine("Error al insertar empleado: " + ex.Message);
+                throw new Exception("Error al insertar empleado: " + ex.Message, ex);
+            }
 
             return 0;
-      }
+        }
 
-     /// <summary>
-      /// Actualiza un empleado existente usando el stored procedure sp_ActualizarEmpleado
-   /// </summary>
+        /// <summary>
+        /// Actualiza un empleado existente usando el stored procedure sp_ActualizarEmpleado
+        /// </summary>
         public int ActualizarEmpleado(int idEmpleado, string nombre, string apellidoPaterno, string apellidoMaterno, string rfc, int? idUsuario)
         {
-        string consulta = "CALL sp_ActualizarEmpleado(@p_ID_Empleado, @p_Nombre, @p_ApellidoPaterno, @p_ApellidoMaterno, @p_RFC, @p_ID_Usuario)";
+            string consulta = "CALL sp_ActualizarEmpleado(@p_ID_Empleado, @p_Nombre, @p_ApellidoPaterno, @p_ApellidoMaterno, @p_RFC, @p_ID_Usuario)";
        
         var parametros = new Dictionary<string, object>
         {
@@ -633,9 +633,54 @@ foreach (var parametro in parametros)
         /// Lista todos los empleados usando el stored procedure sp_ListarEmpleados
       /// </summary>
         public DataTable ListarEmpleados()
+    {
+       string consulta = "CALL sp_ListarEmpleados()";
+     return Select(consulta);
+        }
+
+   /// <summary>
+        /// Obtiene todos los usuarios activos con su información completa
+        /// </summary>
+      /// <returns>DataTable con ID_Usuario, NombreCompleto, NombreUsuario, NombreTipo</returns>
+        public DataTable ObtenerUsuariosActivos()
+      {
+            string consulta = @"
+       SELECT 
+    U.ID_Usuario AS 'ID',
+     CASE 
+     WHEN E.ID_Empleado IS NOT NULL THEN 
+        CONCAT(E.Nombre, ' ', E.ApellidoPaterno, ' ', IFNULL(E.ApellidoMaterno, ''))
+  ELSE 
+       U.NombreUsuario
+          END AS 'Nombre Completo',
+      U.NombreUsuario AS 'Nombre de Usuario',
+          T.NombreTipo AS 'Tipo de Usuario'
+       FROM Usuario U
+          INNER JOIN TipoUsuario T ON U.ID_TipoUsuario = T.ID_TipoUsuario
+        LEFT JOIN Empleado E ON U.ID_Usuario = E.ID_Usuario
+       WHERE U.Activo = TRUE
+                ORDER BY U.ID_Usuario DESC";
+
+          return Select(consulta);
+   }
+
+        /// <summary>
+        /// Desactiva un usuario (marca Activo = FALSE) buscándolo por nombre de usuario
+        /// </summary>
+        /// <param name="nombreUsuario">Nombre de usuario a desactivar</param>
+        /// <returns>Número de filas afectadas</returns>
+        public int DesactivarUsuario(string nombreUsuario)
         {
-          string consulta = "CALL sp_ListarEmpleados()";
-            return Select(consulta);
+string consulta = @"UPDATE Usuario 
+   SET Activo = FALSE 
+         WHERE NombreUsuario = @nombreUsuario";
+
+      var parametros = new Dictionary<string, object>
+     {
+ { "@nombreUsuario", nombreUsuario }
+       };
+
+            return Update(consulta, parametros);
         }
 
     }
