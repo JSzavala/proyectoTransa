@@ -21,6 +21,15 @@ namespace proyectoInventario.backEnd.conexionBd
                 conexionBd = new clsConexionBd();
         }
 
+        /// <summary>
+        /// Obtiene el objeto de conexión MySqlConnection
+        /// </summary>
+        /// <returns>Objeto MySqlConnection</returns>
+        public MySqlConnection ObtenerConexion()
+        {
+      return conexionBd.ObtenerConexion();
+      }
+
          /// <summary>
          /// Método genérico para SELECT - Consulta datos de la base de datos
          /// </summary>
@@ -67,7 +76,7 @@ namespace proyectoInventario.backEnd.conexionBd
         /// <summary>
         /// Método genérico para INSERT - Inserta datos en la base de datos
         /// </summary>
-        /// <param name="consulta">Consulta SQL INSERT con parámetros (@parametro)</param>
+        /// <param name="consulta"> Consulta SQL INSERT con parámetros (@parametro)</param>
         /// <param name="parametros">Diccionario con los parámetros y sus valores</param>
         /// <returns>ID del último registro insertado (si aplica)</returns>
         public long Insert(string consulta, Dictionary<string, object> parametros)
@@ -285,25 +294,23 @@ namespace proyectoInventario.backEnd.conexionBd
         }
 
         // se realiza la actualización en el producto para marcarlo como descontinuado
-        // NOTA: En la nueva BD no existe el campo Descontinuado
-    // Se puede implementar eliminando el producto o manejándolo de otra forma
         public bool DescontinuarProducto(string claveProducto)
-  {
-       // Opción 1: Eliminar el producto (según nueva BD)
+        {
+            
             string consulta = "DELETE FROM Producto WHERE CLAVE = @clave";
-   var parametros = new Dictionary<string, object>
-   {
- {"@clave", claveProducto}
+            var parametros = new Dictionary<string, object>
+            {
+                {"@clave", claveProducto}
             };
 
             int filas = Delete(consulta, parametros);
             return filas > 0;
             
         // NOTA: Si se desea mantener un registro histórico, considere:
-       // 1. Crear una tabla ProductosDescontinuados
-    // 2. Mover el producto a esa tabla antes de eliminarlo
-     // 3. O agregar un campo ACTIVO a la tabla Producto
-      }
+        // 1. Crear una tabla ProductosDescontinuados
+        // 2. Mover el producto a esa tabla antes de eliminarlo
+        // 3. O agregar un campo ACTIVO a la tabla Producto
+        }
 
         /// <summary>
         /// Método genérico para SELECT con JOIN y WHERE - Consulta datos de múltiples tablas relacionadas
@@ -352,116 +359,114 @@ namespace proyectoInventario.backEnd.conexionBd
         public DataTable ObtenerVentasPorFecha(string mes, string anio)
         {
         // Validamos que vengan datos antes de ir a la BD
-       if (string.IsNullOrEmpty(mes) || string.IsNullOrEmpty(anio))
-   {
-     return null;
-            }
+        if (string.IsNullOrEmpty(mes) || string.IsNullOrEmpty(anio))
+        {
+            return null;
+        }
 
             //Creo aqui hay problemas con el nombre de algunas columnas, por si luego a 
-       //alguien no le funciona es por eso
-  string sql = @"
-         SELECT 
-             P.Nombre AS 'Titulo Libro',
-    P.Descripcion AS 'Genero/Desc',
-          SUM(DV.Cantidad) AS 'Unidades Vendidas',
-                    SUM(DV.Subtotal) AS 'Total Ingresos'
- FROM Venta V
-       INNER JOIN DetalleVenta DV ON V.ID_Venta = DV.ID_Venta
-         INNER JOIN Producto P ON DV.CLAVE_Producto = P.CLAVE
-      WHERE MONTH(V.FechaHoraVenta) = @Mes 
-           AND YEAR(V.FechaHoraVenta) = @Anio
-         GROUP BY P.CLAVE, P.Nombre, P.Descripcion
-     ORDER BY SUM(DV.Cantidad) DESC";
+            //alguien no le funciona es por eso
+            string sql = @"
+            SELECT 
+            P.Nombre AS 'Titulo Libro',
+            P.Descripcion AS 'Genero/Desc',
+            SUM(DV.Cantidad) AS 'Unidades Vendidas',
+            SUM(DV.Subtotal) AS 'Total Ingresos'
+            FROM Venta V
+            INNER JOIN DetalleVenta DV ON V.ID_Venta = DV.ID_Venta
+            INNER JOIN Producto P ON DV.CLAVE_Producto = P.CLAVE
+            WHERE MONTH(V.FechaHoraVenta) = @Mes 
+            AND YEAR(V.FechaHoraVenta) = @Anio
+            GROUP BY P.CLAVE, P.Nombre, P.Descripcion
+            ORDER BY SUM(DV.Cantidad) DESC";
 
-            // 2. Preparamos los parámetros usando tu estructura
-      var parametros = new Dictionary<string, object>
-       {
-           { "@Mes", mes },
-     { "@Anio", anio }
+            
+            var parametros = new Dictionary<string, object>
+            {
+                { "@Mes", mes },
+                { "@Anio", anio }
             };
-
-    // 3. Ejecutamos usando el método de instancia actual
           return SelectWithJoin(sql, parametros);
         }
 
-  /// <summary>
+        /// <summary>
         /// Obtiene todos los registros de auditoría de productos
         /// </summary>
-    /// <returns>DataTable con todos los cambios registrados en AuditoriaProducto</returns>
+        /// <returns>DataTable con todos los cambios registrados en AuditoriaProducto</returns>
         public DataTable ObtenerTodosLosCambios()
- {
+        {
             string consulta = @"
-         SELECT 
-        ID_Auditoria AS 'ID',
-        CLAVE_Producto AS 'Clave Producto',
-           FechaHoraCambio AS 'Fecha/Hora',
-              TipoCambio AS 'Tipo de Cambio',
-   CampoModificado AS 'Campo',
-           ValorAnterior AS 'Valor Anterior',
-           ValorNuevo AS 'Valor Nuevo',
-  UsuarioDB AS 'Usuario BD'
-             FROM AuditoriaProducto
-             ORDER BY FechaHoraCambio DESC";
+            SELECT 
+            ID_Auditoria AS 'ID',
+            CLAVE_Producto AS 'Clave Producto',
+            FechaHoraCambio AS 'Fecha/Hora',
+            TipoCambio AS 'Tipo de Cambio',
+            CampoModificado AS 'Campo',
+            ValorAnterior AS 'Valor Anterior',
+            ValorNuevo AS 'Valor Nuevo',
+            UsuarioDB AS 'Usuario BD'
+            FROM AuditoriaProducto
+            ORDER BY FechaHoraCambio DESC";
 
             return Select(consulta);
         }
 
         /// <summary>
         /// Obtiene solo los registros de auditoría con tipo UPDATE
-/// </summary>
-   /// <returns>DataTable con los cambios tipo UPDATE de AuditoriaProducto</returns>
+        /// </summary>
+        /// <returns>DataTable con los cambios tipo UPDATE de AuditoriaProducto</returns>
         public DataTable ObtenerCambiosUpdate()
-{
-     string consulta = @"
-         SELECT 
-     ID_Auditoria AS 'ID',
- CLAVE_Producto AS 'Clave Producto',
-      FechaHoraCambio AS 'Fecha/Hora',
-    TipoCambio AS 'Tipo de Cambio',
-    CampoModificado AS 'Campo',
-  ValorAnterior AS 'Valor Anterior',
-  ValorNuevo AS 'Valor Nuevo',
-  UsuarioDB AS 'Usuario BD'
-         FROM AuditoriaProducto
-          WHERE TipoCambio = @TipoCambio
-       ORDER BY FechaHoraCambio DESC";
+        {
+            string consulta = @"
+            SELECT 
+            ID_Auditoria AS 'ID',
+            CLAVE_Producto AS 'Clave Producto',
+            FechaHoraCambio AS 'Fecha/Hora',
+            TipoCambio AS 'Tipo de Cambio',
+            CampoModificado AS 'Campo',
+            ValorAnterior AS 'Valor Anterior',
+            ValorNuevo AS 'Valor Nuevo',
+            UsuarioDB AS 'Usuario BD'
+            FROM AuditoriaProducto
+            WHERE TipoCambio = @TipoCambio
+            ORDER BY FechaHoraCambio DESC";
 
             var parametros = new Dictionary<string, object>
-       {
-  { "@TipoCambio", "UPDATE" }
-  };
+            {
+                { "@TipoCambio", "UPDATE" }
+            };
 
-    return Select(consulta, parametros);
- }
+            return Select(consulta, parametros);
+        }
 
- /// <summary>
+        /// <summary>
         /// Obtiene el reporte de ventas por empleado usando la función de BD fn_TotalVentasPorRango
-      /// </summary>
+        /// </summary>
         /// <param name="fechaInicio">Fecha inicial del período a consultar</param>
-  /// <param name="fechaFin">Fecha final del período a consultar</param>
+        /// <param name="fechaFin">Fecha final del período a consultar</param>
         /// <returns>DataTable con ID_Empleado, Nombre completo, Total de ventas y Monto total</returns>
         public DataTable ObtenerVentasPorEmpleado(DateTime fechaInicio, DateTime fechaFin)
-  {
+        {
             // Consulta que obtiene ventas por empleado y usa la función de BD para validación
-          string consulta = @"
-       SELECT 
-        e.ID_Empleado AS 'ID Empleado',
-     CONCAT(e.Nombre, ' ', e.ApellidoPaterno, ' ', IFNULL(e.ApellidoMaterno, '')) AS 'Nombre Completo',
-  COUNT(v.ID_Venta) AS 'Total Ventas',
-          SUM(v.Total) AS 'Monto Total',
-      fn_TotalVentasPorRango(@fechaInicio, @fechaFin) AS 'Total General'
-      FROM Empleado e
-    INNER JOIN Venta v ON e.ID_Empleado = v.ID_Empleado
-       WHERE v.FechaHoraVenta BETWEEN @fechaInicio AND @fechaFin
-   AND v.Estado = 'Pagada'
-  GROUP BY e.ID_Empleado, e.Nombre, e.ApellidoPaterno, e.ApellidoMaterno
-    ORDER BY SUM(v.Total) DESC";
+            string consulta = @"
+            SELECT 
+            e.ID_Empleado AS 'ID Empleado',
+            CONCAT(e.Nombre, ' ', e.ApellidoPaterno, ' ', IFNULL(e.ApellidoMaterno, '')) AS 'Nombre Completo',
+            COUNT(v.ID_Venta) AS 'Total Ventas',
+            SUM(v.Total) AS 'Monto Total',
+            fn_TotalVentasPorRango(@fechaInicio, @fechaFin) AS 'Total General'
+            FROM Empleado e
+            INNER JOIN Venta v ON e.ID_Empleado = v.ID_Empleado
+            WHERE v.FechaHoraVenta BETWEEN @fechaInicio AND @fechaFin
+            AND v.Estado = 'Pagada'
+            GROUP BY e.ID_Empleado, e.Nombre, e.ApellidoPaterno, e.ApellidoMaterno
+            ORDER BY SUM(v.Total) DESC";
 
             var parametros = new Dictionary<string, object>
-    {
-           { "@fechaInicio", fechaInicio },
-  { "@fechaFin", fechaFin }
- };
+            {
+                { "@fechaInicio", fechaInicio },
+                { "@fechaFin", fechaFin }
+            };
 
             return SelectWithJoin(consulta, parametros);
         }
@@ -472,40 +477,40 @@ namespace proyectoInventario.backEnd.conexionBd
         /// <returns>DataTable con ID_TipoUsuario y NombreTipo</returns>
         public DataTable ObtenerTiposUsuario()
         {
-  string consulta = "SELECT ID_TipoUsuario, NombreTipo FROM TipoUsuario";
-     return Select(consulta);
-  }
+            string consulta = "SELECT ID_TipoUsuario, NombreTipo FROM TipoUsuario";
+            return Select(consulta);
+        }
 
         /// <summary>
         /// Inserta un nuevo usuario en la base de datos
         /// </summary>
-/// <param name="nombreUsuario">Nombre de usuario único</param>
+        /// <param name="nombreUsuario">Nombre de usuario único</param>
         /// <param name="contrasena">Contraseña del usuario</param>
         /// <param name="idTipoUsuario">ID del tipo de usuario (1=Administrador, 2=Vendedor)</param>
         /// <returns>ID del usuario creado</returns>
         public long InsertarUsuario(string nombreUsuario, string contrasena, int idTipoUsuario)
-   {
+        {
             string consulta = @"INSERT INTO Usuario (NombreUsuario, Contrasena, ID_TipoUsuario, Activo) 
-    VALUES (@nombreUsuario, @contrasena, @idTipoUsuario, TRUE)";
+            VALUES (@nombreUsuario, @contrasena, @idTipoUsuario, TRUE)";
      
-          var parametros = new Dictionary<string, object>
-   {
-         { "@nombreUsuario", nombreUsuario },
-           { "@contrasena", contrasena },
-       { "@idTipoUsuario", idTipoUsuario }
-    };
+            var parametros = new Dictionary<string, object>
+            {
+                { "@nombreUsuario", nombreUsuario },
+                { "@contrasena", contrasena },
+                { "@idTipoUsuario", idTipoUsuario }
+            };
 
-  return Insert(consulta, parametros);
-    }
+            return Insert(consulta, parametros);
+        }
 
-  /// <summary>
+        /// <summary>
         /// Inserta un nuevo empleado usando el stored procedure sp_InsertarEmpleado
-/// </summary>
+        /// </summary>
         /// <param name="nombre">Nombre del empleado</param>
         /// <param name="apellidoPaterno">Apellido paterno del empleado</param>
         /// <param name="apellidoMaterno">Apellido materno del empleado (opcional)</param>
         /// <param name="rfc">RFC del empleado (opcional pero único)</param>
-    /// <param name="idUsuario">ID del usuario asociado (puede ser null)</param>
+        /// <param name="idUsuario">ID del usuario asociado (puede ser null)</param>
         /// <returns>ID del empleado creado</returns>
         public long InsertarEmpleado(string nombre, string apellidoPaterno, string apellidoMaterno, string rfc, int? idUsuario)
         {
@@ -559,110 +564,110 @@ namespace proyectoInventario.backEnd.conexionBd
         {
             string consulta = "CALL sp_ActualizarEmpleado(@p_ID_Empleado, @p_Nombre, @p_ApellidoPaterno, @p_ApellidoMaterno, @p_RFC, @p_ID_Usuario)";
        
-        var parametros = new Dictionary<string, object>
-        {
- { "@p_ID_Empleado", idEmpleado },
-    { "@p_Nombre", nombre },
+            var parametros = new Dictionary<string, object>
+            {
+                { "@p_ID_Empleado", idEmpleado },
+                { "@p_Nombre", nombre },
                 { "@p_ApellidoPaterno", apellidoPaterno },
-      { "@p_ApellidoMaterno", apellidoMaterno },
-   { "@p_RFC", rfc },
-    { "@p_ID_Usuario", idUsuario }
+                { "@p_ApellidoMaterno", apellidoMaterno },
+                { "@p_RFC", rfc },
+                { "@p_ID_Usuario", idUsuario }
             };
 
             try
- {
-       if (conexionBd.AbrirConexion())
-    {
-       using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
-   {
-foreach (var parametro in parametros)
             {
-     comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
-  }
+                if (conexionBd.AbrirConexion())
+                {
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
+                    {
+                        foreach (var parametro in parametros)
+                        {
+                            comando.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
+                        }
 
-         int filasAfectadas = comando.ExecuteNonQuery();
-        conexionBd.CerrarConexion();
-   return filasAfectadas;
-         }
-    }
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        conexionBd.CerrarConexion();
+                        return filasAfectadas;
+                    }
+                }
             }
-  catch (MySqlException ex)
-    {
-    Console.WriteLine("Error al actualizar empleado: " + ex.Message);
-             throw new Exception("Error al actualizar empleado: " + ex.Message, ex);
-       }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al actualizar empleado: " + ex.Message);
+                throw new Exception("Error al actualizar empleado: " + ex.Message, ex);
+            }
 
             return 0;
         }
 
         /// <summary>
         /// Elimina un empleado usando el stored procedure sp_EliminarEmpleado
-      /// </summary>
+        /// </summary>
         public int EliminarEmpleado(int idEmpleado)
         {
- string consulta = "CALL sp_EliminarEmpleado(@p_ID_Empleado)";
+            string consulta = "CALL sp_EliminarEmpleado(@p_ID_Empleado)";
          
-         var parametros = new Dictionary<string, object>
-       {
- { "@p_ID_Empleado", idEmpleado }
+            var parametros = new Dictionary<string, object>
+            {
+                { "@p_ID_Empleado", idEmpleado }
             };
 
-    try
+            try
             {
-  if (conexionBd.AbrirConexion())
-   {
-       using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
-          {
-   comando.Parameters.AddWithValue("@p_ID_Empleado", idEmpleado);
-       int filasAfectadas = comando.ExecuteNonQuery();
-   conexionBd.CerrarConexion();
-            return filasAfectadas;
-             }
+                if (conexionBd.AbrirConexion())
+                {
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexionBd.ObtenerConexion()))
+                    {
+                        comando.Parameters.AddWithValue("@p_ID_Empleado", idEmpleado);
+                        int filasAfectadas = comando.ExecuteNonQuery();
+                        conexionBd.CerrarConexion();
+                        return filasAfectadas;
+                    }
                 }
-     }
-   catch (MySqlException ex)
-         {
-       Console.WriteLine("Error al eliminar empleado: " + ex.Message);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al eliminar empleado: " + ex.Message);
                 throw new Exception("Error al eliminar empleado: " + ex.Message, ex);
-        }
+            }
 
-   return 0;
+            return 0;
         }
 
         /// <summary>
         /// Lista todos los empleados usando el stored procedure sp_ListarEmpleados
-      /// </summary>
+        /// </summary>
         public DataTable ListarEmpleados()
-    {
-       string consulta = "CALL sp_ListarEmpleados()";
-     return Select(consulta);
+        {
+            string consulta = "CALL sp_ListarEmpleados()";
+            return Select(consulta);
         }
 
-   /// <summary>
+        /// <summary>
         /// Obtiene todos los usuarios activos con su información completa
         /// </summary>
-      /// <returns>DataTable con ID_Usuario, NombreCompleto, NombreUsuario, NombreTipo</returns>
+        /// <returns>DataTable con ID_Usuario, NombreCompleto, NombreUsuario, NombreTipo</returns>
         public DataTable ObtenerUsuariosActivos()
-      {
+        {
             string consulta = @"
-       SELECT 
-    U.ID_Usuario AS 'ID',
-     CASE 
-     WHEN E.ID_Empleado IS NOT NULL THEN 
-        CONCAT(E.Nombre, ' ', E.ApellidoPaterno, ' ', IFNULL(E.ApellidoMaterno, ''))
-  ELSE 
-       U.NombreUsuario
-          END AS 'Nombre Completo',
-      U.NombreUsuario AS 'Nombre de Usuario',
-          T.NombreTipo AS 'Tipo de Usuario'
-       FROM Usuario U
-          INNER JOIN TipoUsuario T ON U.ID_TipoUsuario = T.ID_TipoUsuario
-        LEFT JOIN Empleado E ON U.ID_Usuario = E.ID_Usuario
-       WHERE U.Activo = TRUE
-                ORDER BY U.ID_Usuario DESC";
+            SELECT 
+            U.ID_Usuario AS 'ID',
+            CASE 
+            WHEN E.ID_Empleado IS NOT NULL THEN 
+            CONCAT(E.Nombre, ' ', E.ApellidoPaterno, ' ', IFNULL(E.ApellidoMaterno, ''))
+            ELSE 
+            U.NombreUsuario
+            END AS 'Nombre Completo',
+            U.NombreUsuario AS 'Nombre de Usuario',
+            T.NombreTipo AS 'Tipo de Usuario'
+            FROM Usuario U
+            INNER JOIN TipoUsuario T ON U.ID_TipoUsuario = T.ID_TipoUsuario
+            LEFT JOIN Empleado E ON U.ID_Usuario = E.ID_Usuario
+            WHERE U.Activo = TRUE
+            ORDER BY U.ID_Usuario DESC";
 
-          return Select(consulta);
-   }
+            return Select(consulta);
+        }
 
         /// <summary>
         /// Desactiva un usuario (marca Activo = FALSE) buscándolo por nombre de usuario
@@ -671,14 +676,14 @@ foreach (var parametro in parametros)
         /// <returns>Número de filas afectadas</returns>
         public int DesactivarUsuario(string nombreUsuario)
         {
-string consulta = @"UPDATE Usuario 
-   SET Activo = FALSE 
-         WHERE NombreUsuario = @nombreUsuario";
+            string consulta = @"UPDATE Usuario 
+            SET Activo = FALSE 
+            WHERE NombreUsuario = @nombreUsuario";
 
-      var parametros = new Dictionary<string, object>
-     {
- { "@nombreUsuario", nombreUsuario }
-       };
+            var parametros = new Dictionary<string, object>
+            {
+                { "@nombreUsuario", nombreUsuario }
+            };
 
             return Update(consulta, parametros);
         }

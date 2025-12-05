@@ -38,20 +38,19 @@ namespace proyectoInventario
 		{
             this.components = new System.ComponentModel.Container();
             this.lblTitleMain = new System.Windows.Forms.Label();
-            this.txtIDProducto = new System.Windows.Forms.TextBox();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
             this.btnRegistrarVenta = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.lblClaveProducto = new System.Windows.Forms.Label();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDescuento = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnCalcularPrecio = new System.Windows.Forms.Button();
-            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.lblBuscarProducto = new System.Windows.Forms.Label();
             this.lblHora = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dgvProductosVenta = new System.Windows.Forms.DataGridView();
+            this.lblProductosVenta = new System.Windows.Forms.Label();
+            this.lblTotalVenta = new System.Windows.Forms.Label();
+            this.txtTotalVenta = new System.Windows.Forms.TextBox();
+            this.btnEliminarProducto = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitleMain
@@ -59,36 +58,31 @@ namespace proyectoInventario
             this.lblTitleMain.AutoSize = true;
             this.lblTitleMain.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleMain.ForeColor = System.Drawing.Color.White;
-            this.lblTitleMain.Location = new System.Drawing.Point(113, 44);
+            this.lblTitleMain.Location = new System.Drawing.Point(250, 20);
             this.lblTitleMain.Name = "lblTitleMain";
             this.lblTitleMain.Size = new System.Drawing.Size(155, 24);
             this.lblTitleMain.TabIndex = 5;
             this.lblTitleMain.Text = "Registrar Venta";
             // 
-            // txtIDProducto
+            // txtBuscarProducto
             // 
-            this.txtIDProducto.Location = new System.Drawing.Point(48, 104);
-            this.txtIDProducto.Name = "txtIDProducto";
-            this.txtIDProducto.Size = new System.Drawing.Size(280, 20);
-            this.txtIDProducto.TabIndex = 6;
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(48, 145);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(280, 20);
-            this.txtCantidad.TabIndex = 7;
+            this.txtBuscarProducto.Font = new System.Drawing.Font("Arial", 10F);
+            this.txtBuscarProducto.Location = new System.Drawing.Point(30, 90);
+            this.txtBuscarProducto.Name = "txtBuscarProducto";
+            this.txtBuscarProducto.Size = new System.Drawing.Size(280, 23);
+            this.txtBuscarProducto.TabIndex = 6;
+            this.txtBuscarProducto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarProducto_KeyUp);
             // 
             // btnRegistrarVenta
             // 
-            this.btnRegistrarVenta.BackColor = System.Drawing.Color.Blue;
+            this.btnRegistrarVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnRegistrarVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegistrarVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarVenta.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrarVenta.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
             this.btnRegistrarVenta.ForeColor = System.Drawing.Color.White;
-            this.btnRegistrarVenta.Location = new System.Drawing.Point(31, 345);
+            this.btnRegistrarVenta.Location = new System.Drawing.Point(450, 490);
             this.btnRegistrarVenta.Name = "btnRegistrarVenta";
-            this.btnRegistrarVenta.Size = new System.Drawing.Size(110, 38);
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(160, 45);
             this.btnRegistrarVenta.TabIndex = 10;
             this.btnRegistrarVenta.Text = "Registrar Venta";
             this.btnRegistrarVenta.UseVisualStyleBackColor = false;
@@ -109,145 +103,145 @@ namespace proyectoInventario
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.BtnVolver_Click);
             // 
-            // lblClaveProducto
+            // lblBuscarProducto
             // 
-            this.lblClaveProducto.AutoSize = true;
-            this.lblClaveProducto.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblClaveProducto.ForeColor = System.Drawing.Color.White;
-            this.lblClaveProducto.Location = new System.Drawing.Point(48, 86);
-            this.lblClaveProducto.Name = "lblClaveProducto";
-            this.lblClaveProducto.Size = new System.Drawing.Size(113, 15);
-            this.lblClaveProducto.TabIndex = 12;
-            this.lblClaveProducto.Text = "Clave del Producto:";
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.ForeColor = System.Drawing.Color.White;
-            this.lblCantidad.Location = new System.Drawing.Point(48, 127);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(60, 15);
-            this.lblCantidad.TabIndex = 13;
-            this.lblCantidad.Text = "Cantidad:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(48, 168);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 15);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Descuento:";
-            // 
-            // txtDescuento
-            // 
-            this.txtDescuento.Location = new System.Drawing.Point(48, 186);
-            this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(280, 20);
-            this.txtDescuento.TabIndex = 15;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(114, 229);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 18);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Total a Pagar:";
-            // 
-            // btnCalcularPrecio
-            // 
-            this.btnCalcularPrecio.BackColor = System.Drawing.Color.Blue;
-            this.btnCalcularPrecio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCalcularPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalcularPrecio.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcularPrecio.ForeColor = System.Drawing.Color.White;
-            this.btnCalcularPrecio.Location = new System.Drawing.Point(243, 345);
-            this.btnCalcularPrecio.Name = "btnCalcularPrecio";
-            this.btnCalcularPrecio.Size = new System.Drawing.Size(110, 38);
-            this.btnCalcularPrecio.TabIndex = 17;
-            this.btnCalcularPrecio.Text = "Calcular Precio";
-            this.btnCalcularPrecio.UseVisualStyleBackColor = false;
-            this.btnCalcularPrecio.Click += new System.EventHandler(this.btnCalcularPrecio_Click);
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Location = new System.Drawing.Point(228, 230);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(100, 20);
-            this.txtTotal.TabIndex = 18;
+            this.lblBuscarProducto.AutoSize = true;
+            this.lblBuscarProducto.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuscarProducto.ForeColor = System.Drawing.Color.White;
+            this.lblBuscarProducto.Location = new System.Drawing.Point(30, 65);
+            this.lblBuscarProducto.Name = "lblBuscarProducto";
+            this.lblBuscarProducto.Size = new System.Drawing.Size(240, 16);
+            this.lblBuscarProducto.TabIndex = 12;
+            this.lblBuscarProducto.Text = "Buscar Producto (presione Enter):";
             // 
             // lblHora
             // 
             this.lblHora.AutoSize = true;
+            this.lblHora.Font = new System.Drawing.Font("Arial", 9F);
             this.lblHora.ForeColor = System.Drawing.Color.White;
-            this.lblHora.Location = new System.Drawing.Point(240, 12);
+            this.lblHora.Location = new System.Drawing.Point(500, 15);
             this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(35, 13);
+            this.lblHora.Size = new System.Drawing.Size(35, 15);
             this.lblHora.TabIndex = 19;
-            this.lblHora.Text = "label1";
+            this.lblHora.Text = "00:00";
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
+            this.lblFecha.Font = new System.Drawing.Font("Arial", 9F);
             this.lblFecha.ForeColor = System.Drawing.Color.White;
-            this.lblFecha.Location = new System.Drawing.Point(293, 12);
+            this.lblFecha.Location = new System.Drawing.Point(500, 35);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(35, 13);
+            this.lblFecha.Size = new System.Drawing.Size(67, 15);
             this.lblFecha.TabIndex = 24;
-            this.lblFecha.Text = "label2";
+            this.lblFecha.Text = "01/01/2025";
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // dgvProductosVenta
+            // 
+            this.dgvProductosVenta.AllowUserToAddRows = false;
+            this.dgvProductosVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductosVenta.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(35)))));
+            this.dgvProductosVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductosVenta.Location = new System.Drawing.Point(30, 160);
+            this.dgvProductosVenta.MultiSelect = false;
+            this.dgvProductosVenta.Name = "dgvProductosVenta";
+            this.dgvProductosVenta.ReadOnly = true;
+            this.dgvProductosVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductosVenta.Size = new System.Drawing.Size(580, 280);
+            this.dgvProductosVenta.TabIndex = 25;
+            this.dgvProductosVenta.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductosVenta_CellEndEdit);
+            // 
+            // lblProductosVenta
+            // 
+            this.lblProductosVenta.AutoSize = true;
+            this.lblProductosVenta.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblProductosVenta.ForeColor = System.Drawing.Color.White;
+            this.lblProductosVenta.Location = new System.Drawing.Point(30, 135);
+            this.lblProductosVenta.Name = "lblProductosVenta";
+            this.lblProductosVenta.Size = new System.Drawing.Size(157, 16);
+            this.lblProductosVenta.TabIndex = 26;
+            this.lblProductosVenta.Text = "Productos en la Venta";
+            // 
+            // lblTotalVenta
+            // 
+            this.lblTotalVenta.AutoSize = true;
+            this.lblTotalVenta.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lblTotalVenta.ForeColor = System.Drawing.Color.White;
+            this.lblTotalVenta.Location = new System.Drawing.Point(30, 460);
+            this.lblTotalVenta.Name = "lblTotalVenta";
+            this.lblTotalVenta.Size = new System.Drawing.Size(108, 19);
+            this.lblTotalVenta.TabIndex = 27;
+            this.lblTotalVenta.Text = "Total Venta:";
+            // 
+            // txtTotalVenta
+            // 
+            this.txtTotalVenta.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+            this.txtTotalVenta.Location = new System.Drawing.Point(150, 455);
+            this.txtTotalVenta.Name = "txtTotalVenta";
+            this.txtTotalVenta.ReadOnly = true;
+            this.txtTotalVenta.Size = new System.Drawing.Size(150, 29);
+            this.txtTotalVenta.TabIndex = 28;
+            this.txtTotalVenta.Text = "0.00";
+            this.txtTotalVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnEliminarProducto
+            // 
+            this.btnEliminarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnEliminarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarProducto.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarProducto.ForeColor = System.Drawing.Color.White;
+            this.btnEliminarProducto.Location = new System.Drawing.Point(330, 90);
+            this.btnEliminarProducto.Name = "btnEliminarProducto";
+            this.btnEliminarProducto.Size = new System.Drawing.Size(150, 23);
+            this.btnEliminarProducto.TabIndex = 29;
+            this.btnEliminarProducto.Text = "Eliminar Producto";
+            this.btnEliminarProducto.UseVisualStyleBackColor = false;
+            this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
+            // 
             // RegistrarVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(59)))), ((int)(((byte)(82)))));
-            this.ClientSize = new System.Drawing.Size(375, 411);
+            this.ClientSize = new System.Drawing.Size(640, 550);
+            this.Controls.Add(this.btnEliminarProducto);
+            this.Controls.Add(this.txtTotalVenta);
+            this.Controls.Add(this.lblTotalVenta);
+            this.Controls.Add(this.lblProductosVenta);
+            this.Controls.Add(this.dgvProductosVenta);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblHora);
-            this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.btnCalcularPrecio);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtDescuento);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblCantidad);
-            this.Controls.Add(this.lblClaveProducto);
+            this.Controls.Add(this.lblBuscarProducto);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnRegistrarVenta);
-            this.Controls.Add(this.txtCantidad);
-            this.Controls.Add(this.txtIDProducto);
+            this.Controls.Add(this.txtBuscarProducto);
             this.Controls.Add(this.lblTitleMain);
             this.Name = "RegistrarVenta";
             this.Text = "Registrar Venta";
             this.Load += new System.EventHandler(this.RegistrarVentaLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
 		private System.Windows.Forms.Button btnVolver;
 		private System.Windows.Forms.Button btnRegistrarVenta;
-		private System.Windows.Forms.TextBox txtCantidad;
-		private System.Windows.Forms.TextBox txtIDProducto;
+		private System.Windows.Forms.TextBox txtBuscarProducto;
 		private System.Windows.Forms.Label lblTitleMain;
-		private System.Windows.Forms.Label lblClaveProducto;
-		private System.Windows.Forms.Label lblCantidad;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDescuento;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnCalcularPrecio;
-        private System.Windows.Forms.TextBox txtTotal;
+		private System.Windows.Forms.Label lblBuscarProducto;
         private System.Windows.Forms.Label lblHora;
-        private System.Windows.Forms.Label lblFecha;
+  private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridView dgvProductosVenta;
+        private System.Windows.Forms.Label lblProductosVenta;
+        private System.Windows.Forms.Label lblTotalVenta;
+        private System.Windows.Forms.TextBox txtTotalVenta;
+    private System.Windows.Forms.Button btnEliminarProducto;
     }
 }
